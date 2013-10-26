@@ -9276,6 +9276,8 @@ let
 
   pioneers = callPackage ../games/pioneers { };
 
+  playonlinux = callPackage ../games/playonlinux { };
+
   pong3d = callPackage ../games/pong3d { };
 
   prboom = callPackage ../games/prboom { };
