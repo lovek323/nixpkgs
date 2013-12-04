@@ -1,6 +1,6 @@
 { stdenv, fetchurl, lib, iasl, dev86, pam, libxslt, libxml2, libX11, xproto, libXext
 , libXcursor, libXmu, qt4, libIDL, SDL, libcap, zlib, libpng, glib, kernelDev, lvm2
-, which, alsaLib, curl, gawk
+, which, alsaLib, curl, gawk, libvpx
 , xorriso, makeself, perl, pkgconfig
 , javaBindings ? false, jdk ? null
 , pythonBindings ? false, python ? null
@@ -11,7 +11,7 @@ with stdenv.lib;
 
 let
 
-  version = "4.2.18"; # changes ./guest-additions as well
+  version = "4.3.4"; # changes ./guest-additions as well
 
   forEachModule = action: ''
     for mod in \
@@ -31,13 +31,15 @@ let
   '';
 
   # See https://github.com/NixOS/nixpkgs/issues/672 for details
-  extpackRevision = "88780";
+  extpackRevision = "91027";
   extensionPack = requireFile rec {
     name = "Oracle_VM_VirtualBox_Extension_Pack-${version}-${extpackRevision}.vbox-extpack";
+
     # IMPORTANT: Hash must be base16 encoded because it's used as an input to
     # VBoxExtPackHelperApp!
-    # Tip: see http://dlc.sun.com.edgesuite.net/virtualbox/4.2.18/SHA256SUMS
-    sha256 = "1d1737b59d0f30f5d42beeabaff168bdc0a75b8b28df685979be6173e5adbbba";
+    # Tip: see http://dlc.sun.com.edgesuite.net/virtualbox/4.3.4/SHA256SUMS
+    sha256 = "8d192cf3c045817e3a89383aaad9ea992ccb7f47ae820c885caa182996a0f30d";
+
     message = ''
       In order to use the extension pack, you need to comply with the VirtualBox Personal Use
       and Evaluation License (PUEL) by downloading the related binaries from:
@@ -55,14 +57,14 @@ in stdenv.mkDerivation {
   name = "virtualbox-${version}-${kernelDev.version}";
 
   src = fetchurl {
-    url = "http://download.virtualbox.org/virtualbox/${version}/VirtualBox-${version}.tar.bz2";
-    sha256 = "9dbddf393b029c549249f627d12040c1d257972bc09292969b8819a31ab78d74";
+    url    = "http://download.virtualbox.org/virtualbox/${version}/VirtualBox-${version}.tar.bz2";
+    sha256 = "07rfrff5ly3bg48pjxn98qdwkqi216m5xc6zsbrwn24c106h5ffj";
   };
 
   buildInputs =
     [ iasl dev86 libxslt libxml2 xproto libX11 libXext libXcursor qt4 libIDL SDL
       libcap glib kernelDev lvm2 python alsaLib curl pam xorriso makeself perl
-      pkgconfig which libXmu ]
+      pkgconfig which libXmu libvpx ]
     ++ optional javaBindings jdk
     ++ optional pythonBindings python;
 
