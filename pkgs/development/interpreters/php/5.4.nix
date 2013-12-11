@@ -1,7 +1,8 @@
 { stdenv, fetchurl, composableDerivation, autoconf, automake, flex, bison
 , apacheHttpd, mysql, libxml2, readline, zlib, curl, gd, postgresql, gettext
 , openssl, pkgconfig, sqlite, config, libiconv, libjpeg, libpng, freetype
-, libxslt, libmcrypt, bzip2, icu, openldap, cyrus_sasl, libmhash }:
+, libxslt, libmcrypt, bzip2, icu, openldap, cyrus_sasl, libmhash, uwimap
+, pam }:
 
 let
   libmcryptOverride = libmcrypt.override { disablePosixThreads = true; };
@@ -135,6 +136,14 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
         buildInputs = [gettext];
       };
 
+      imap = {
+        configureFlags = [ "--with-imap=${uwimap}" "--with-imap-ssl" ]
+          # uwimap builds with kerberos on darwin
+          ++ stdenv.lib.optional (stdenv.isDarwin) "--with-kerberos";
+        buildInputs = [ uwimap openssl ]
+          ++ stdenv.lib.optional (!stdenv.isDarwin) pam;
+      };
+
       intl = {
         configureFlags = ["--enable-intl"];
         buildInputs = [icu];
@@ -192,6 +201,7 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
     socketsSupport = config.php.sockets or true;
     curlSupport = config.php.curl or true;
     gettextSupport = config.php.gettext or true;
+    imapSupport = config.php.imap or false;
     pcntlSupport = config.php.pcntl or true;
     postgresqlSupport = config.php.postgresql or true;
     readlineSupport = config.php.readline or true;
