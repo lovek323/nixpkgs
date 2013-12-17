@@ -1,4 +1,4 @@
-{ fetchurl, stdenv, python, cmake, vim, perl, ruby, unzip, which }:
+{ fetchurl, stdenv, python, cmake, vim, perl, ruby, unzip, which, fetchgit }:
 
 /*
 About Vim and plugins
@@ -208,6 +208,22 @@ in rec
       description = "A two-way integration between vim and iPython";
       homepage    = https://github.com/ivanov/vim-ipython;
       repositories.git = https://github.com/ivanov/vim-ipython.git;
+      license     = licenses.publicDomain;
+      maintainers = with maintainers; [ lovek323 ];
+      platforms   = platforms.unix;
+    };
+  };
+
+  srcexpl = simpleDerivation {
+    name = "vim-srcexpl";
+    src = fetchgit {
+      url = https://github.com/wesleyche/SrcExpl.git;
+      rev = "ba827cb3d2d1e7f0616850f147dfef744215fea2";
+    };
+    path = "srcexpl";
+    meta = with stdenv.lib; {
+      description = "A source-code explorer";
+      homepage    = https://github.com/wesleyche/SrcExpl;
       license     = licenses.publicDomain;
       maintainers = with maintainers; [ lovek323 ];
       platforms   = platforms.unix;
