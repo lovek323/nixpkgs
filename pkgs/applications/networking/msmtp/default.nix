@@ -15,6 +15,6 @@ stdenv.mkDerivation rec {
       homepage = "http://msmtp.sourceforge.net/";
       license = stdenv.lib.licenses.gpl3;
       maintainers = [ stdenv.lib.maintainers.garbas ];
-      platforms = stdenv.lib.platforms.linux;
+      platforms = stdenv.lib.platforms.unix;
     };
 }
