@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, ncurses, gettext,
+{ stdenv, stdenvAdapters, fetchFromGitHub, ncurses, gettext,
   pkgconfig, cscope, python, ruby, tcl, perl, luajit
 }:
 
