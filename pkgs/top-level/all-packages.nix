@@ -3406,11 +3406,7 @@ let
 
   llvm_v = path: callPackage path { };
 
-  llvmPackages = if !stdenv.isDarwin then llvmPackages_34 else llvmPackages_34 // {
-    # until someone solves build problems with _34
-    llvm = llvm_33;
-    clang = clang_33;
-  };
+  llvmPackages = llvmPackages_34;
 
   llvmPackages_34 = recurseIntoAttrs (import ../development/compilers/llvm/3.4 {
     inherit stdenv newScope fetchurl;
@@ -12170,6 +12166,7 @@ let
   };
 
   nixUnstable = callPackage ../tools/package-management/nix/unstable.nix {
+    stdenv = if stdenv.isDarwin then allStdenvs.stdenvDarwin33 else stdenv;
     storeDir = config.nix.storeDir or "/nix/store";
     stateDir = config.nix.stateDir or "/nix/var";
   };
