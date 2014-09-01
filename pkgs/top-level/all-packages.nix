@@ -4842,6 +4842,9 @@ let
 
   gnutls32 = callPackage ../development/libraries/gnutls/3.2.nix {
     guileBindings = config.gnutls.guile or false;
+    stdenv = if stdenv.isDarwin
+      then clangStdenv
+      else stdenv;
   };
 
   gnutls_with_guile = lowPrio (gnutls.override { guileBindings = true; });
