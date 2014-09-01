@@ -8698,7 +8698,11 @@ let
 
   fldigi = callPackage ../applications/audio/fldigi { };
 
-  fluidsynth = callPackage ../applications/audio/fluidsynth { };
+  fluidsynth = callPackage ../applications/audio/fluidsynth {
+    stdenv = if stdenv.isDarwin
+      then clangStdenv
+      else stdenv;
+  };
 
   fossil = callPackage ../applications/version-management/fossil { };
 
