@@ -5262,7 +5262,11 @@ let
 
   libftdi1 = callPackage ../development/libraries/libftdi/1.x.nix { };
 
-  libgcrypt = callPackage ../development/libraries/libgcrypt { };
+  libgcrypt = callPackage ../development/libraries/libgcrypt {
+    stdenv = if stdenv.isDarwin
+      then clangStdenv
+      else stdenv;
+  };
 
   libgcrypt_1_6 = lowPrio (callPackage ../development/libraries/libgcrypt/1.6.nix { });
 

@@ -12,6 +12,9 @@ stdenv.mkDerivation (rec {
 
   doCheck = stdenv.system != "i686-linux"; # "basic" test fails after stdenv+glibc-2.18
 
+  # avoid the 'invalid alignment value' errors
+  configureFlags = stdenv.lib.optionals stdenv.isDarwin [ "--disable-asm" ];
+
   # For some reason the tests don't find `libgpg-error.so'.
   checkPhase = ''
     LD_LIBRARY_PATH="${libgpgerror}/lib:$LD_LIBRARY_PATH" \
