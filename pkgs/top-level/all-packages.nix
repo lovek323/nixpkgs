@@ -5369,7 +5369,11 @@ let
 
   libid3tag = callPackage ../development/libraries/libid3tag { };
 
-  libidn = callPackage ../development/libraries/libidn { };
+  libidn = callPackage ../development/libraries/libidn {
+    stdenv = if stdenv.isDarwin
+      then clangStdenv
+      else stdenv;
+  };
 
   libiec61883 = callPackage ../development/libraries/libiec61883 { };
 
