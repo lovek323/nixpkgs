@@ -16,8 +16,8 @@ stdenv.mkDerivation rec {
 
   configureFlags =
     [ "--enable-shared" "--disable-static"
-      "--enable-threads" "--enable-openmp" # very small wrappers
-    ]
+      "--enable-threads" ]
+    ++ optional (!stdenv.isDarwin) "--enable-openmp" # very small wrappers
     ++ optional (precision != "double") "--enable-${precision}"
     # all x86_64 have sse2
     ++ optional stdenv.isx86_64 "--enable-sse2";
