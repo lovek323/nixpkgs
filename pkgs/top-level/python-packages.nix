@@ -130,7 +130,10 @@ let
   pycairo = callPackage ../development/python-modules/pycairo {
   };
 
-  pycrypto = callPackage ../development/python-modules/pycrypto { };
+  pycrypto = import ../development/python-modules/pycrypto {
+    inherit (pkgs) fetchurl stdenv gmp gnused;
+    inherit python buildPythonPackage;
+  };
 
   pygobject = callPackage ../development/python-modules/pygobject { };
 

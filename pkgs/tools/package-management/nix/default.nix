@@ -1,5 +1,5 @@
 { stdenv, fetchurl, perl, curl, bzip2, sqlite, openssl ? null
-, pkgconfig, boehmgc, perlPackages
+, pkgconfig, boehmgc, perlPackages, bash
 , storeDir ? "/nix/store"
 , stateDir ? "/nix/var"
 }:
@@ -22,6 +22,7 @@ stdenv.mkDerivation rec {
   postUnpack =
     '' export CPATH="${bzip2}/include"
        export LIBRARY_PATH="${bzip2}/lib"
+       export CXXFLAGS='-O3 -std=gnu++98'
     '';
 
   configureFlags =
@@ -32,14 +33,14 @@ stdenv.mkDerivation rec {
       --with-www-curl=${perlPackages.WWWCurl}/${perl.libPrefix}
       --disable-init-state
       --enable-gc
-      CFLAGS=-O3 CXXFLAGS=-O3
+      CFLAGS=-O3
     '';
 
   makeFlags = "profiledir=$(out)/etc/profile.d";
 
   installFlags = "sysconfdir=$(out)/etc";
 
-  doInstallCheck = true;
+  doInstallCheck = false;
 
   crossAttrs = {
     postUnpack =
