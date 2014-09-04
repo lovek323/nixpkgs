@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   name = "tree-${version}";
 
   src = fetchurl {
-    url = "http://mama.indstate.edu/users/ice/tree/src/tree-${version}.tgz";
+    url    = "http://fossies.org/linux/misc/tree-${version}.tgz";
     sha256 = "04kviw799qxly08zb8n5mgxfd96gyis6x69q2qiw86jnh87c4mv9";
   };
 
