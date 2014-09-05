@@ -239,7 +239,18 @@ composableDerivation.composableDerivation {} ( fixed : let inherit (fixed.fixed)
 
     iniFile=$out/etc/php-recommended.ini
     [[ -z "$libxml2" ]] || export PATH=$PATH:$libxml2/bin
-    ./configure --with-config-file-scan-dir=/etc --with-config-file-path=$out/etc --prefix=$out $configureFlags
+    ./configure \
+      --with-config-file-scan-dir=/etc \
+      --with-config-file-path=$out/etc \
+      --prefix=$out \
+      $configureFlags
+  '';
+
+  preBuild = stdenv.lib.optionalString stdenv.isDarwin ''
+    sed -i 's/CFLAGS_CLEAN =.*$/CFLAGS_CLEAN = -g -O2 -fvisibility=hidden/' \
+      Makefile
+    sed -i 's|-I"/usr/include"||' Makefile
+    sed -i '/#define uint unsigned int/d' main/php_config.h
   '';
 
   installPhase = ''
