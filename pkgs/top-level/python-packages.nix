@@ -6358,7 +6358,8 @@ let
 
     preCheck = ''
       export LANG="en_US.UTF-8"
-      export LOCALE_ARCHIVE=${localePath}
+    '' + stdenv.lib.optionalString (!stdenv.isDarwin) ''
+      export LOCALE_ARCHIVE=${pkgs.glibcLocales}/lib/locale/locale-archive
     '';
 
     meta = {
