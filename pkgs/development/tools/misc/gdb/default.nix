@@ -50,6 +50,10 @@ stdenv.mkDerivation rec {
     + optionalString (target != null) " --target=${target.config}"
     + optionalString (elem stdenv.system platforms.cygwin) "  --without-python";
 
+  preBuild = ''
+    sed -i 's|#include <machine/setjmp.h>|#include <setjmp.h>|' gdb/darwin-nat.c
+  '';
+
   crossAttrs = {
     # Do not add --with-python here to avoid cross building it.
     configureFlags =
