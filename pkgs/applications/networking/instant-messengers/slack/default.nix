@@ -29,6 +29,7 @@ let
 
     xorg.libxkbfile
     xorg.libX11
+    xorg.libXScrnSaver
     xorg.libXcomposite
     xorg.libXcursor
     xorg.libXdamage
@@ -38,7 +39,7 @@ let
     xorg.libXrandr
     xorg.libXrender
     xorg.libXtst
-    xorg.libXScrnSaver
+    xorg.libxkbfile
   ] + ":${stdenv.cc.cc.lib}/lib64";
 
   src =
