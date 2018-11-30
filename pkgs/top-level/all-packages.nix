@@ -14641,6 +14641,8 @@ in
     };
   };
 
+  roon-server = callPackage ../servers/roon-server { };
+
   s6 = skawarePackages.s6;
 
   s6-rc = skawarePackages.s6-rc;
