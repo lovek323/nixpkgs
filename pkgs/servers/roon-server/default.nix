@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name = "roon-server";
-  version = "100500363";
+  version = "100600390";
 
   src = fetchurl {
     url = "http://download.roonlabs.com/updates/stable/RoonServer_linuxx64_${version}.tar.bz2";
-    sha256 = "1pdlglhmsm0l4k6g4l97ckw596ckw8nnxii60j1xg994kdiikz3s";
+    sha256 = "01vm6czdxknwiz09vqq8lkqsmjzy1jp0v3l3wjrp48sqqljh9pxi";
   };
 
   propagatedBuildInputs = [ alsaLib alsaUtils cifs_utils ffmpeg libav mono ];
@@ -17,8 +17,9 @@ stdenv.mkDerivation rec {
     sed -i '/check_ulimit$/d' check.sh
 
     # Start script
-    sed -i '3i PATH=$PATH:${alsaUtils}/bin:${cifs_utils}/bin:${ffmpeg}/bin:${libav}/bin' start.sh
-    sed -i '4i ROON_DATAROOT=/tmp/roon' start.sh
+    sed -i '3i export PATH=$PATH:${alsaUtils}/bin:${cifs_utils}/bin:${ffmpeg}/bin:${libav}/bin' start.sh
+    sed -i '4i export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${alsaLib}/lib' start.sh
+    sed -i '5i ROON_DATAROOT=/tmp/roon' start.sh
 
     # Debug logging
     sed -i '/--debug--gc=sgen --server/exec "$HARDLINK" --debug --gc=sgen --server "$SCRIPT.exe" "$@" -storagetrace -watchertrace' Appliance/RoonAppliance
