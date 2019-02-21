@@ -3927,6 +3927,23 @@ let
     };
   };
 
+  DB_File = buildPerlPackage rec {
+    name = "DB_File-1.843";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/P/PM/PMQS/${name}.tar.gz";
+      sha256 = "de24e3d1e56b1b56c1f143590fb8ab8b812ebd9697e9c01349b0ba11c36f346a";
+    };
+    preConfigure = ''
+      sed -i 's#/usr/local/BerkeleyDB/include#${pkgs.db62.dev}/include#g' config.in
+      sed -i 's#/usr/local/BerkeleyDB/lib#${pkgs.db62.out}/lib#g' config.in
+    '';
+    propagatedBuildInputs = [ pkgs.db62.dev pkgs.db62.out ];
+    meta = {
+      description = "Perl5 access to Berkeley DB version 1.x";
+      license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
   DebugShowStuff = buildPerlModule {
     name = "Debug-ShowStuff-1.16";
     src = fetchurl {
@@ -8248,6 +8265,20 @@ let
     propagatedBuildInputs = [ JSONXS ];
     meta = {
       license = with stdenv.lib.licenses; [ artistic1 gpl1Plus ];
+    };
+  };
+
+  LaTeXML = buildPerlPackage rec {
+    name = "LaTeXML-0.8.3";
+    src = fetchurl {
+      url = "mirror://cpan/authors/id/B/BR/BRMILLER/${name}.tar.gz";
+      sha256 = "6e5afad7b88b01ef9becc3a9a5a6c8b0b2a973111eb84e1c147080bf68302e5a";
+    };
+    doCheck = false;
+    propagatedBuildInputs = [ ArchiveZip DB_File FileWhich IOString ImageSize JSONXS LWP ParseRecDescent TextUnidecode URI XMLLibXML XMLLibXSLT ];
+    meta = {
+      description = "Transforms TeX and LaTeX into XML/HTML/MathML";
+      license = stdenv.lib.licenses.free;
     };
   };
 
