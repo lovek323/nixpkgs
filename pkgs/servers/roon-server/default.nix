@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name = "roon-server";
-  version = "100600401";
+  version = "100600416";
 
   src = fetchurl {
     url = "http://download.roonlabs.com/updates/stable/RoonServer_linuxx64_${version}.tar.bz2";
-    sha256 = "121mmdh35q4bpgsqhcps6a6q1f4ld9v4hq9gp181bf2n779pk8sh";
+    sha256 = "1jag6pjhq0qqys50i4d38lnnq9zmwph3rrp4170ymzcyr0x8m2ww";
   };
 
   propagatedBuildInputs = [ alsaLib alsaUtils cifs_utils ffmpeg libav mono ];
