@@ -5,11 +5,11 @@
 
 stdenv.mkDerivation rec {
   pname = "netatalk";
-  version = "3.1.13";
+  version = "3.1.12";
 
   src = fetchurl {
     url = "mirror://sourceforge/netatalk/netatalk/netatalk-${version}.tar.bz2";
-    sha256 = "0pg0slvvvq3l6f5yjz9ybijg4i6rs5a6c8wcynaasf8vzsyadbc9";
+    sha256 = "sha256-FWD4Oj2kG+l+C3CpbiQCFZuN3GMdOFODYLFHhL6tpdE=";
   };
 
   patches = [
@@ -19,6 +19,11 @@ stdenv.mkDerivation rec {
       name = "make-afpstats-python3-compatible.patch";
       url = "https://github.com/Netatalk/Netatalk/commit/916b515705cf7ba28dc53d13202811c6e1fe6a9e.patch";
       sha256 = "sha256-DAABpYjQPJLsQBhmtP30gA357w0Qn+AsnFgAeyDC/Rg=";
+    })
+    (fetchpatch {
+      name = "netatalk-3.1.12-fno-common.patch";
+      url = "https://gitweb.gentoo.org/repo/gentoo.git/plain/net-fs/netatalk/files/netatalk-3.1.12-fno-common.patch?id=233aa32334f7ed86ac66897f9edd47f221bc299f";
+      sha256 = "sha256-/nxS3w9uBG4uZ0rJn9RjLORhvhupzQP91AAza5mzhV0=";
     })
   ];
 
