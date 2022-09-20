@@ -122,7 +122,7 @@ stdenv.mkDerivation (finalAttrs: rec {
     };
 
     # Convert a "stdenv.hostPlatform.system" to a dotnet RID
-    systemToDotnetRid = system: runtimeIdentifierMap.${system} or (throw "unsupported platform ${system}");
+    systemToDotnetRid = system: runtimeIdentifierMap.${system} or "linux-x64";
 
     tests = {
       version = testers.testVersion {

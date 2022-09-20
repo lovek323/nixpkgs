@@ -1,28 +1,29 @@
-{ lib, stdenv, fetchurl, mono, libmediainfo, sqlite, curl, chromaprint, makeWrapper }:
+{ lib, fetchFromGitHub, buildDotnetModule, dotnetCorePackages, libmediainfo, openssl, sqlite, curl, chromaprint, nodejs, yarn, tree }:
 
-stdenv.mkDerivation rec {
+buildDotnetModule rec {
   pname = "lidarr";
-  version = "0.8.1.2135";
+  version = "1.1.0.2649";
 
-  src = fetchurl {
-    url = "https://github.com/lidarr/Lidarr/releases/download/v${version}/Lidarr.master.${version}.linux.tar.gz";
-    sha256 = "sha256-eJX6t19D2slX68fXSMd/Vix3XSgCVylK+Wd8VH9jsuI=";
+  src = fetchFromGitHub {
+    owner = "Lidarr";
+    repo = "Lidarr";
+    rev = "v${version}";
+    sha256 = "sha256-toBQ/0BXBqf/cCKmQkgtXBJypaKeS2toHfv17sMRs/8=";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  buildInputs = [ nodejs yarn tree ];
+  dotnetFlags = [ "-p:RuntimeIdentifiers=linux-x64" "-p:Deterministic=false" "-p:TargetFramework=net6.0" ];
+  executables = [ "Lidarr" ];
+  nugetDeps = ./deps.nix;
+  projectFile = "src/Lidarr.sln";
+  runtimeDeps = [ libmediainfo openssl sqlite curl chromaprint ];
+  selfContainedBuild = true;
 
-  installPhase = ''
-    mkdir -p $out/bin
-    cp -r * $out/bin/
-
-    # Mark main executable as executable
-    chmod +x $out/bin/Lidarr.exe
-
-    makeWrapper "${mono}/bin/mono" $out/bin/Lidarr \
-      --add-flags "$out/bin/Lidarr.exe" \
-      --prefix PATH : ${lib.makeBinPath [ chromaprint ]} \
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [
-          curl sqlite libmediainfo ]}
+  preConfigure = ''
+    yarn install --frozen-lockfile --network-timeout 120000
+    yarn run build --env production
+    mkdir -p $out/lib/lidarr
+    cp -r _output/UI $out/lib/lidarr
   '';
 
   meta = with lib; {
