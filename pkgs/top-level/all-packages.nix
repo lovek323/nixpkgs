@@ -12845,6 +12845,8 @@ with pkgs;
 
   sacd = callPackage ../tools/cd-dvd/sacd { };
 
+  sacd-ripper = callPackage ../tools/cd-dvd/sacd-ripper { };
+
   safe = callPackage ../tools/security/safe { };
 
   safety-cli = with python3.pkgs; toPythonApplication safety;
