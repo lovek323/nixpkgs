@@ -10454,6 +10454,8 @@ with pkgs;
     libtorrent = callPackage ../applications/networking/p2p/jesec-rtorrent/libtorrent.nix { };
   };
 
+  libdvd-audio = callPackage ../tools/cd-dvd/libdvd-audio { };
+
   libmpack = callPackage ../development/libraries/libmpack { };
 
   libiberty = callPackage ../development/libraries/libiberty { };
@@ -10470,8 +10472,7 @@ with pkgs;
 
   libzim = callPackage ../development/libraries/libzim { };
 
-
-  libzmf = callPackage ../development/libraries/libzmf { };
+  libzmf = callPackage ../development/libraries/libzmf {};
 
   libreddit = callPackage ../servers/libreddit {
     inherit (darwin.apple_sdk.frameworks) Security;
