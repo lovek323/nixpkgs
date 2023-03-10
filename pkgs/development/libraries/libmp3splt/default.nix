@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, libtool, libmad, libid3tag }:
+{ lib, stdenv, fetchurl, libtool, libmad, libid3tag, libogg, libvorbis, flac, pkg-config }:
 
 stdenv.mkDerivation rec {
   pname = "libmp3splt";
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
 
   outputs = [ "out" "dev" ];
   nativeBuildInputs = [ libtool ];
-  buildInputs = [ libmad libid3tag ];
+  buildInputs = [ libmad libid3tag libogg libvorbis flac pkg-config ];
 
   configureFlags = [ "--disable-pcre" ];
 
