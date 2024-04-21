@@ -12,6 +12,7 @@ stdenv.mkDerivation rec {
   outputs = [ "out" "dev" ];
   nativeBuildInputs = [ libtool ];
   buildInputs = [ libmad libid3tag libogg libvorbis flac pkg-config ];
+  patches = [ ./2c0bb6891349ed880634352e4551ed48002e53eb.diff ];
 
   configureFlags = [ "--disable-pcre" ];
 
