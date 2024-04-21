@@ -1318,6 +1318,8 @@ with pkgs;
       inherit kernel firmware rootModules allowMissing;
     };
 
+  metadsf = callPackage ../applications/audio/metadsf { };
+
   mkBinaryCache = callPackage ../build-support/binary-cache { };
 
   mkShell = callPackage ../build-support/mkshell { };
