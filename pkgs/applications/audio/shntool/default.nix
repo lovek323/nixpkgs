@@ -1,15 +1,21 @@
 { lib, stdenv, fetchurl, flac }:
 
 stdenv.mkDerivation {
-  version = "3.0.10";
+  version = "3.0.10-2";
   pname = "shntool";
 
   src = fetchurl {
-    url = "http://www.etree.org/shnutils/shntool/dist/src/shntool-3.0.10.tar.gz";
-    sha256 = "00i1rbjaaws3drkhiczaign3lnbhr161b7rbnjr8z83w8yn2wc3l";
+    url = "http://deb.debian.org/debian/pool/main/s/shntool/shntool_3.0.10.orig.tar.gz";
+    sha256 = "sha256-dDAurEd8oI+ytCufFUzIcFk67IvqswhnbkNzpeTKIQI=";
   };
 
   buildInputs = [ flac ];
+
+  patches = [
+    ./debian/patches/large-size.patch
+    ./debian/patches/large-times.patch
+    ./debian/patches/no-cdquality-check.patch
+  ];
 
   meta = {
     description = "Multi-purpose WAVE data processing and reporting utility";

@@ -1,0 +1,31 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: shntool
+Upstream-Contact: Jason Jordan <shnutils@freeshell.org>
+Source: http://etree.org/shnutils/shntool/
+Comment:
+ This package was debianized by Joshua Kwan <joshk@triplehelix.org>
+ on Mon, 28 Mar 2005 15:56:21 -0800
+
+Files: *
+Copyright: 2000-2009 Jason Jordan <shnutils@freeshell.org>
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2014      Dmitry Smirnov <onlyjob@debian.org>
+           2008      César Gómez Martín <cesar.gomez@gmail.com>
+           2004-2008 Joshua Kwan <joshk@triplehelix.org>
+License: GPL-2+
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ The complete text of the GNU General Public License version 2
+ can be found in "/usr/share/common-licenses/GPL-2".

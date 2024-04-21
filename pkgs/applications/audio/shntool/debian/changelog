@@ -1,0 +1,53 @@
+shntool (3.0.10-1) unstable; urgency=low
+
+  * New upstream release [March 2009] (Closes: #507528).
+  * Don't mention wavpack in long description (Closes: #719344).
+  * New patch to disable CD-quality check (Closes: #769585).
+  * New patches to fix large files processing (Closes: #684600).
+  * Suggests: wavpack.
+  * Added missing man pages links.
+  * DH/compat to version 9; convert to source format "3.0 (quilt)";
+  * "debian/copyright" to copyright-format 1.0.
+  * Standards-Version: 3.9.6
+  * Added VCS links to new repository at collab-maint.
+  * Taken over the package, with permission from César Gómez Martín.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 15 Nov 2014 07:46:52 +1100
+
+shntool (3.0.7-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Use dh-autoreconf in build to support new architectures (Closes: #748804) 
+
+ -- Chen Baozi <baozich@gmail.com>  Fri, 06 Jun 2014 20:51:55 +0800
+
+shntool (3.0.7-1) unstable; urgency=low
+
+  * New upstream release
+  * New maintainer (Closes: #460180)
+  * Added Homepage field to debian/control
+  * Added debian/watch file
+  * debian/copyright date updated
+
+ -- César Gómez Martín <cesar.gomez@gmail.com>  Sat, 05 Apr 2008 02:19:43 +0200
+
+shntool (3.0.6-1) unstable; urgency=low
+
+  * New upstream version.
+  * Bump Standards-Version to 3.7.3 - no changes.
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Thu, 10 Jan 2008 21:26:02 -0800
+
+shntool (3.0.3-1) unstable; urgency=low
+
+  * New upstream major release, whoa! closes: #427809
+  * Respect CFLAGS, per Policy "should".
+  * Bump Standards-Version to 3.7.2 - no changes.
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Fri, 08 Jun 2007 23:49:24 -0700
+
+shntool (2.0.3-1) unstable; urgency=low
+
+  * Initial release. (closes: #295767)
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Sat, 17 Jul 2004 17:22:15 -0700
