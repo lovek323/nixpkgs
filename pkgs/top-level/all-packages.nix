@@ -2522,6 +2522,12 @@ with pkgs;
   };
   elasticsearch = elasticsearch7;
 
+  elk8Version = "8.15.0";
+  elasticsearch8 = callPackage ../servers/search/elasticsearch/8.x.nix {
+    util-linux = util-linuxMinimal;
+    jre_headless = jdk11_headless;
+  };
+
   elasticsearchPlugins = recurseIntoAttrs (
     callPackage ../servers/search/elasticsearch/plugins.nix { }
   );
