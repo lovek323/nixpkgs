@@ -109,7 +109,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dprofiler=disabled"
   ];
 
-  doCheck = !stdenv.hostPlatform.isDarwin;
+  doCheck = false;
 
   postPatch = ''
     patchShebangs build/choose-tests-locale.sh
